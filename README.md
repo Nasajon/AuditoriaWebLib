@@ -212,3 +212,26 @@ _Obs.: Para objetos cuja inserção não tenha sido inicialmente registrada no b
 | descricao | string | Texto livre descritivo do evento de inserção. | Não<sup>1</sup> |
 
 1. _Estas informações podem não estar preenchidas, caso a flag ```estado_duvidoso``` esteja marcada como ```true``` (pois seriam informações não disponíveis)._
+
+## Processo de qualidade
+
+Com vistas a proporcionar aderência à ferramenta de auditoria, bem como contribuir com a qualidade dos produtos (no que se refere ao cumprimento das normas legais da LGPD, bem como dos requisitos de segurança com o objetivo da certificação ISO 27000), seguem sugestões de alteração ao processo de desenvolvimento:
+
+1. Tornar obrigatória a definição do código MOPE correspondente à cada nova funcionalidade implementada (desde o escopo da especificação funcional dos requisitos).
+    * Incluir no mapa de corretivas e adaptativas o mesmo princípio de definição dos códigos MOPE (revisando, incrementalmente, as features já implementadas).
+    * Deve-se também  considerar a abertura porposital de tarefas para revisão das transações que vão de encontro aos dados sigilosos de acordo com a LGPD.
+2. Incluir, como passo de code review, a verificação das chamadas à biblioteca de auditoria (para registro das ocorrências das transações MOPE).
+    * Decidir se será criado um processo de code review, onde a equipe de arquitetura entre como aprovador obrigatório das alterações (à semalhança do que se faz para as tarefas de banco de dados).
+        * Prós: 1) Inclusão das decisões de arquitetura nos processos do dia a dia; 2) Tendência à simplificação das exigências de arquitetura (para não se tornar um processo de aprovação inviável).
+        * Contras: 1) Impacto direto nos processos de desenvolvimento (diminuição da agilidade, e aumento da burocracia); 2) Alta demanda de revisão para o pessoal da arquitetura (uma vez que as demandas viriam de todas as equipes).
+    * Outra alternativa seria tornar todos os líderes técnicos da equipes, como membros do Comité de Arquitetura, gerando engajamento maior com tais decisões, e cobrando desses a execução prática (e o code review).
+        * Prós: 1) Melhor distribuição de responsabilidades; 2) Menor sobrecarga sobre o pessoal de arquitetura; 3) Participação direta das equipes de produto nas decisões arquiteturais (maior engajamento e melhor comunicação, para decisões arquiteturais mais relevantes).
+        * Contras: 1) Menor centralização, e consquente maior risco de faltade padronização; 2) Lentidão nas alterações de demandas (necessidade de maior coordenação de esforços).
+    * _Obs.: É preferida (pelo autor) a segunda abordagem._
+3. Incluir, nos roteiros da equipe de QA, a verificação de gravação dos registros de auditoria.
+    * O que também demandará trabalho incremental para as features já existentes (e trabalho porposital, para as features relacionadas ao LGPD).
+    * Decidir se a inadequação será tratada como critério de auditoria (com perda de pontuação para as políticas de avaliação de desempenho), ou como critério para abertura de tarefas corretivas.
+    * _Obs. 1: É preferida (pelo autor) a segunda abordagem (pois a auditoria, neste caso, se dá como requisito funcional)._
+    * _Obs. 2: Será necessária a implementação de interfaces para consulta dos registros de auditoria (por parte do pessoal de QA)._
+
+Por fim, para suportar todas as adaptações acima, sugere-se a realização de reuniões de alinhamento com todas as equipes impactadas (para orientação e feedback sobre tais necessidades).
